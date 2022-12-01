@@ -12,11 +12,11 @@
 
   <header>
 
-    <nav class="flex items-center justify-between flex-wrap bg-blue-400 p-6">
+    <nav class="flex items-center justify-between flex-wrap bg-indigo-700 p-6">
 
         <div id="icon" class="flex items-center flex-shrink-0 text-white mr-6">
-             <!-- <div class="m-3"><i class="fa-solid fa-piggy-bank text-3xl"></i></div> -->
-          <span class="font-semibold text-xl tracking-tight">Careers</span>
+          <!-- <div class="m-3"><i></i></div> -->
+          <span class="font-semibold text-xl tracking-tight">JobPortal</span>
         </div>
 
         <div class="block lg:hidden">
@@ -27,17 +27,14 @@
 
         <div id='menu' class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div class="text-sm font-extrabold  lg:flex-grow">
-            <a href="#responsive-header" id="navBalance" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-green-200 mr-4">
+            <a href="#responsive-header" id="navHome" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-indigo-200 mr-4">
               Home
             </a>
 
-            <a href="#responsive-header" id="navCategory" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-green-200 mr-4">
-              Create Job
+            <a href="#responsive-header" id="navJob" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-indigo-200 mr-4">
+              Crear trabajo
             </a>
 
-             <!-- <a href="#responsive-header" id="navReports" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-green-200">
-              Reportes 
-            </a>  -->
           </div>
 
         </div>
@@ -48,75 +45,110 @@
 
 <!-- FILTERS -->
 
-<section id="filters" class="w-full mt-4 flex flex-col justify-center items-center md:flex md:flex-row">
+<section id="filters" class="w-full mt-4 flex flex-col justify-center items-center">
+  
+    <select id="chooseFilter" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8">
+      <option value="choice">Elegir filtro</option>
+      <option value="choice1">Location</option>
+      <option value="choice2">Seniority</option>
+      <option value="choice3">Category</option>
+    </select>
 
-  <select id="filterLocation" class="w-4/5 my-2 h-10 border border-blue-400 rounded-md md:w-1/5 md:mx-1">
+  <select id="filterLocation" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
     <option>Location</option>
+    <option value="">Hola</option>
   </select>
 
-  <select id="filterSeniority" class="w-4/5 my-2 h-10 border border-blue-400 rounded-md md:w-1/5 md:mx-1">
+  <select id="filterSeniority" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
     <option>Seniority</option>
   </select>
 
-  <select id="filterCategory" class="w-4/5 my-2 h-10 border border-blue-400 rounded-md md:w-1/5 md:mx-1">
+  <select id="filterCategory" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
     <option>Category</option>
   </select>
 
-  <div class="w-full flex justify-center md:w-1/3">
-    <button class="w-1/3 h-10 m-1 rounded-md bg-blue-400 text-white font-bold">Search</button>
-    <button class="w-1/3 h-10 m-1 rounded-md bg-blue-400 text-white font-bold">Clear</button>
+  <div id="filterButtons" class="w-full flex justify-center md:w-2/5 hidden">
+    <button class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Buscar</button>
+    <button class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Limpiar</button>
   </div>
 
 </section>
 
+<section id="confirm" class="flex justify-center items-center hidden"></section>
+
 <!-- CARDS -->
 
-<section id="container" class="hidden" class="w-full h-full mt-4 flex flex-col justify-center items-center sm:flex sm:flex-wrap sm:flex-row">
+<section id="container" class="w-full h-full mt-4 flex flex-col justify-center items-center sm:flex sm:flex-wrap sm:flex-row">
      
-    <!-- <div id = "card-{id}" class="w-5/6 h-96 my-3 border border-2 rounded-md shadow-2xl sm: w-1/5">
-        <figure class ="w-full h-1/3">
-            <img src="https://f.hubspotusercontent20.net/hubfs/5115875/Backend-y-Frontend-%C2%BFQu%C3%A9-es-c%C3%B3mo-funcionan-en-la-programaci%C3%B3n.jpg" alt="">
-        </figure>
-        <div id ="contents" class="h-2/3 flex flex-col justify-center items-center">
-            <h3>${name}</h3>
-            <p>${description}</p>
-            <div>
-                <div id="locationDiv">${location}</div>
-                <div id="categoryDiv">${category}</div>
-                <div id="seniorityDiv">${seniority}</div>
-            </div>
-            <button class="w-2/3 h-10 rounded-md shadow-md bg-blue-400 text-white font-bold">See Details</button>
-        </div>
-    </div> 
-     -->
-
 </section>
 
 <!-- CREATE JOB -->
 
-<section class="w-full my-4 flex flex-col justify-center items-center">
+<section id="newJobForm" class="w-full my-4 flex flex-col justify-center items-center hidden">
 
-    <form action="" method="get" class="w-full md:max-w-3xl">
+    <form action="" class="w-full md:max-w-3xl">
+
+        <div class="m-2 flex flex-col justify-center">
+            <label for="jobImg" class="text-lg font-bold">Img(src)</label>
+            <input type="text" id="jobImg" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+        </div>
 
         <div class="m-2 flex flex-col justify-center">
             <label for="jobTitle" class="text-lg font-bold">Job title</label>
-            <input type="text" id="jobTitle" class="w-full h-10 border border-blue-400 rounded-md capitalize" maxlength="20" required>
+            <input type="text" id="jobTitle" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
         </div>
 
         <div class="m-2 flex flex-col justify-center">
             <label for="jobDescription" class="text-lg font-bold">Description</label>
-            <textarea name="textarea" rows="10" cols="50" class="w-full border border-blue-400 rounded-md capitalize"></textarea>
+            <textarea name="textarea" rows="10" cols="50" class="w-full border border-indigo-700 rounded-md capitalize"></textarea>
         </div>
 
         <div class="m-2 flex flex-col justify-center">
             <label for="jobTags" class="text-lg font-bold">Tags</label>
-            <input type="text" placeholder="Location" class="w-full p-2 h-10 my-1 border border-blue-400 rounded-md capitalize" maxlength="20" required>
-            <input type="text" placeholder="Seniority" class="w-full p-2 h-10 my-1 border border-blue-400 rounded-md capitalize" maxlength="20" required>
-            <input type="text" placeholder="Category" class="w-full p-2 h-10 my-1 border border-blue-400 rounded-md capitalize" maxlength="20" required>
+            <input type="text" placeholder="Location" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+            <input type="text" placeholder="Seniority" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+            <input type="text" placeholder="Category" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
         </div>
 
         <div class="m-2">
-            <input type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-blue-400 text-white font-bold">
+            <input type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">
+        </div>
+
+       
+    </form>
+
+</section>
+
+<!-- FORM EDIT -->
+
+<section id="editJobForm" class="w-full my-4 flex flex-col justify-center items-center hidden">
+
+    <form id="editForm" action="" class="w-full md:max-w-3xl">
+
+        <div class="m-2 flex flex-col justify-center">
+            <label for="editJobImg" class="text-lg font-bold">Img(src)</label>
+            <input type="text" id="editJobImg" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+        </div>
+
+        <div class="m-2 flex flex-col justify-center">
+            <label for="editJobTitle" class="text-lg font-bold">Job title</label>
+            <input type="text" id="editJobTitle" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+        </div>
+
+        <div class="m-2 flex flex-col justify-center">
+            <label for="editJobDescription" class="text-lg font-bold">Description</label>
+            <textarea id="editJobDescription" name="textarea" rows="10" cols="50" class="w-full border border-indigo-700 rounded-md capitalize"></textarea>
+        </div>
+
+        <div class="m-2 flex flex-col justify-center">
+            <label for="jobTags" class="text-lg font-bold">Tags</label>
+            <input id="editLocation" type="text" placeholder="Location" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+            <input id="editSeniority" type="text" placeholder="Seniority" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+            <input id="editCategory" type="text" placeholder="Category" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+        </div>
+
+        <div class="m-2">
+            <input id="submitEdited" type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">
         </div>
 
        
@@ -124,8 +156,7 @@
 
 </section>
    
-    
-<script src="js/script.js"></script>
+<script src="js/script.js"></script>   
 
 </body>
 </html>
