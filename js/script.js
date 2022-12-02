@@ -6,6 +6,7 @@ const showElement = (selector) => selector.classList.remove("hidden")
 
 
 //TRAER TRABAJOS
+
 const getJobs = async () => {
     const response = await fetch("https://6381400d9440b61b0d14b99a.mockapi.io/jobs")
     const jobs = await response.json()
@@ -183,6 +184,40 @@ $("#editForm").addEventListener("submit", (e) => {
     console.log(id)
     editJob(id)
 })
+
+
+//CREAR UN TRABAJO
+
+const postNewJob = () => {
+    fetch("https://6381400d9440b61b0d14b99a.mockapi.io/jobs", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify(saveNewJob())
+    }).finally(() => window.location.href = "index.html")
+}
+
+const saveNewJob =()=>{
+   
+    return  {
+        description:$("#jobDescription").value,
+        name:$("#jobTitle").value,
+        location:$("#jobLocation").value,
+        category:$("#jobCategory").value,
+        seniority:$("#jobSeniority").value,
+        img:$("#jobImg").value,
+    }
+    
+}
+
+
+$("#newJobForm").addEventListener('submit', (e) =>{
+    e.preventDefault()
+    hideElement($("#newJobForm"))
+    postNewJob()
+})
+
 
 
 
