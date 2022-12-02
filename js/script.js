@@ -219,8 +219,6 @@ $("#newJobForm").addEventListener('submit', (e) =>{
 })
 
 
-
-
 //EVENTOS
 
 $("#navJob").addEventListener('click', () =>{
