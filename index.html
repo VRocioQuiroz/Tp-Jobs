@@ -47,28 +47,37 @@
 
 <section id="filters" class="w-full mt-4 flex flex-col justify-center items-center">
   
-    <select id="chooseFilter" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8">
-      <option value="choice">Elegir filtro</option>
-      <option value="choice1">Location</option>
-      <option value="choice2">Seniority</option>
-      <option value="choice3">Category</option>
-    </select>
+  <select id="chooseFilter" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8">
+    <option value="choose">Elegir filtro</option>
+    <option value="chooseByLocation">Location</option>
+    <option value="chooseBySeniority">Seniority</option>
+    <option value="chooseByCategory">Category</option>
+  </select>
 
   <select id="filterLocation" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
-    <option>Location</option>
-    <option value="">Hola</option>
+    <option>location 1</option>
+    <option>location 2</option>
+    <option>location 3</option>
+    <option>location 4</option>
+    
   </select>
 
   <select id="filterSeniority" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
-    <option>Seniority</option>
+    <option>seniority 1</option>
+    <option>seniority 2</option>
+    <option>seniority 3</option>
+    <option>seniority 4</option>
   </select>
 
   <select id="filterCategory" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
-    <option>Category</option>
+    <option>category 12</option>
+    <option>category 2</option>
+    <option>category 3</option>
+    <option>category 4</option>
   </select>
 
   <div id="filterButtons" class="w-full flex justify-center md:w-2/5 hidden">
-    <button class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Buscar</button>
+    <button id="searchBtn" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Buscar</button>
     <button class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Limpiar</button>
   </div>
 
