@@ -35,7 +35,7 @@ const jobsCards = (arrayJobs) => {
               <img src=${img}" alt="job" class="w-full h-[170px]">
             </figure>
             <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
-                <h3 class="text-xl font-bold underline">${name}</h3>
+                <h3 class="text-xl text-center font-bold underline">${name}</h3>
                 <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
             
                 <div class="flex flex-row">
@@ -85,7 +85,7 @@ const viewJobDetail = (job) => {
 
         <div class="flex w-full justify-center">
             <button data-id="${id}" class="btnEditJob w-1/3 h-10 m-2 rounded-md shadow-md bg-green-400 text-white font-bold" >Edit</button>
-            <button  data-id="${id}" class="btnDeleteJob w-1/3 h-10 m-2 rounded-md shadow-md bg-red-400 text-white font-bold" >Delete</button>  
+            <button data-id="${id}" class="btnDeleteJob w-1/3 h-10 m-2 rounded-md shadow-md bg-red-400 text-white font-bold" >Delete</button>  
         </div>
     </div>
     `
@@ -122,11 +122,19 @@ const viewJobDetail = (job) => {
 const alertConfirm = (id) => {
     getAJob(id).then(data => $("#confirm").innerHTML = `
     <div class="w-4/5 h-16 border-red-500 bg-red-200 flex justify-center items-center md:w-3/5">
-       <p class="text-red-500 mr-3">Are you sure to delete ${data.name}?</p>
-       <button id="${data.id}" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Delete Job</button>
-       <button id="btnCancelToDelete" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancel()">Cancel</button>
+       <p class="text-red-500 mr-3">¿Estás seguro de eliminar ${data.name}?</p>
+       <button id="${data.id}" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Eliminar trabajo</button>
+       <button class="w-1/3 h-10 m-1 rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancelDeleteJob()">Cancelar</button>
     </div>`)
        
+}
+
+//CANCELAR ELIMINACION DE TRABAJO
+
+const cancelDeleteJob = () => {
+    hideElement($("#confirm"))
+
+    getJobs().then(data => jobsCards(data))
 }
 
 
@@ -139,8 +147,8 @@ const deleteJob = (id) => {
 }
 
 
-
 //EDITAR TRABAJO
+
 //Precarga
 
 const preloadJob = (job) => {
@@ -270,16 +278,12 @@ $("#chooseFilter").addEventListener("change",(e) =>{
         hideElement($("#filterCategory"))
         showElement($("#filterButtons"))
 
-      //$("#searchBtn").addEventListener("click",()=> filterByLocation())
-
     }    
     if (e.target.value === "chooseBySeniority"){
         showElement($("#filterSeniority"))
         hideElement($("#filterLocation"))
         hideElement($("#filterCategory"))
         showElement($("#filterButtons"))
-
-      //$("#searchBtn").addEventListener("click",()=> filterBySeniority())
     
     }
     if (e.target.value === "chooseByCategory"){
@@ -288,8 +292,6 @@ $("#chooseFilter").addEventListener("change",(e) =>{
        hideElement($("#filterSeniority"))
        showElement($("#filterButtons"))
 
-      //$("#searchBtn").addEventListener("click",()=> filterByCategory())
-    
     }
     if(e.target.value === "choose"){
        hideElement($("#filterLocation"))
@@ -321,6 +323,19 @@ $("#searchBtn").addEventListener("click",()=>{
         })
         
     }
+})
+
+//EVENTO LIMPIAR
+
+$("#cleanBtn").addEventListener("click",()=>{
+    $("#container").innerHTML= ""
+    getJobs().then(data => jobsCards(data))
+
+    $("#chooseFilter").value = "choose"
+    hideElement($("#filterLocation"))
+    hideElement($("#filterSeniority"))
+    hideElement($("#filterCategory"))
+    hideElement($("#filterButtons")) 
 })
 
 
