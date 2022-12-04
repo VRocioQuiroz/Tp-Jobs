@@ -13,7 +13,7 @@ const getJobs = async () => {
     return jobs
 }
 
-getJobs().then(data=>jobsCards(data))
+getJobs().then(data => jobsCards(data))
 
 //TRAER UN TRABAJO
 
@@ -30,22 +30,23 @@ const jobsCards = (arrayJobs) => {
     for(const {id, name,description,location,category,seniority,img} of arrayJobs){
         
        $("#container").innerHTML += `
-       <div id ="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
-       <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
-           <img src=${img}" alt="job" class="w-full h-[170px]">
-       </figure>
-       <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
-           <h3 class="text-xl font-bold underline">${name}</h3>
-           <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
-           <div class="flex flex-row">
-               <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
-               <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
-               <div id="seniorityDiv" class="m-1 px-1 bg-orange-400 text-sm text-center font-bold rounded-md">${seniority}</div>
-           </div>
-           <button class="w-2/3 h-10 my-2 rounded-md shadow-md bg-indigo-700 text-white font-bold btnDetailJob" data-id="${id}">Ver detalles</button>
-       </div>
-   </div>
-    `
+        <div id ="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
+            <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
+              <img src=${img}" alt="job" class="w-full h-[170px]">
+            </figure>
+            <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
+                <h3 class="text-xl text-center font-bold underline">${name}</h3>
+                <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
+            
+                <div class="flex flex-row">
+                   <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
+                   <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
+                   <div id="seniorityDiv" class="m-1 px-1 bg-orange-400 text-sm text-center font-bold rounded-md">${seniority}</div>
+                </div>
+                <button class="w-2/3 h-10 my-2 rounded-md shadow-md bg-indigo-700 text-white font-bold btnDetailJob" data-id="${id}">Ver detalles</button>
+            </div>
+        </div>
+        `
     }
 
     for (const btn of $$(".btnDetailJob")) {
@@ -67,32 +68,33 @@ const viewJobDetail = (job) => {
     
     $("#container").innerHTML = `
     
-       <div id="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
+    <div id="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
        <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
-           <img src=${img}" alt="job" class="w-full h-[170px]">
+            <img src=${img}" alt="job" class="w-full h-[170px]">
        </figure>
        <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
-           <h3 class="text-xl font-bold underline">${name}</h3>
-           <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
-           <div class="flex flex-row">
+            <h3 class="text-xl font-bold underline">${name}</h3>
+            <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
+            <div class="flex flex-row">
                <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
                <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
                <div id="seniorityDiv" class="m-1 px-1 bg-orange-400 text-sm text-center font-bold rounded-md">${seniority}</div>
-           </div>
+            </div>
           
         </div>
 
         <div class="flex w-full justify-center">
             <button data-id="${id}" class="btnEditJob w-1/3 h-10 m-2 rounded-md shadow-md bg-green-400 text-white font-bold" >Edit</button>
-            <button  data-id="${id}" class="btnDeleteJob w-1/3 h-10 m-2 rounded-md shadow-md bg-red-400 text-white font-bold" >Delete</button>  
+            <button data-id="${id}" class="btnDeleteJob w-1/3 h-10 m-2 rounded-md shadow-md bg-red-400 text-white font-bold" >Delete</button>  
         </div>
-   </div>
+    </div>
     `
 
   for (const btn of $$(".btnDeleteJob")) {
     btn.addEventListener("click", () => {
         showElement($("#confirm"))
         $("#container").innerHTML = ""
+
         const jobId = btn.getAttribute("data-id")
         alertConfirm(jobId)
     })
@@ -102,6 +104,7 @@ const viewJobDetail = (job) => {
     btn.addEventListener("click", () => {
         showElement($("#editJobForm"))
         $("#container").innerHTML = ""
+
         preloadJob(job)
 
         const jobId = btn.getAttribute("data-id")
@@ -119,11 +122,19 @@ const viewJobDetail = (job) => {
 const alertConfirm = (id) => {
     getAJob(id).then(data => $("#confirm").innerHTML = `
     <div class="w-4/5 h-16 border-red-500 bg-red-200 flex justify-center items-center md:w-3/5">
-    <p class="text-red-500 mr-3">Are you sure to delete ${data.name}?</p>
-    <button id="${data.id}" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Delete Job</button>
-    <button id="btnCancelToDelete" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancel()">Cancel</button>
+       <p class="text-red-500 mr-3">¿Estás seguro de eliminar ${data.name}?</p>
+       <button id="${data.id}" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Eliminar trabajo</button>
+       <button class="w-1/3 h-10 m-1 rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancelDeleteJob()">Cancelar</button>
     </div>`)
        
+}
+
+//CANCELAR ELIMINACION DE TRABAJO
+
+const cancelDeleteJob = () => {
+    hideElement($("#confirm"))
+
+    getJobs().then(data => jobsCards(data))
 }
 
 
@@ -136,8 +147,8 @@ const deleteJob = (id) => {
 }
 
 
-
 //EDITAR TRABAJO
+
 //Precarga
 
 const preloadJob = (job) => {
@@ -188,6 +199,8 @@ $("#editForm").addEventListener("submit", (e) => {
 
 //CREAR UN TRABAJO
 
+//Envia a mock api
+
 const postNewJob = () => {
     fetch("https://6381400d9440b61b0d14b99a.mockapi.io/jobs", {
         method: "POST",
@@ -198,7 +211,9 @@ const postNewJob = () => {
     }).finally(() => window.location.href = "index.html")
 }
 
-const saveNewJob =()=>{
+//Funcion que crea un trabajo
+
+const saveNewJob = () => {
    
     return  {
         description:$("#jobDescription").value,
@@ -211,6 +226,7 @@ const saveNewJob =()=>{
     
 }
 
+//Evento que lo ejecuta
 
 $("#newJobForm").addEventListener('submit', (e) =>{
     e.preventDefault()
@@ -219,7 +235,111 @@ $("#newJobForm").addEventListener('submit', (e) =>{
 })
 
 
+//FILTROS
+
+//getJobs().then(data =>getJobs(data))
+
+const filterByLocation = async () => {
+
+ let jobsFilter = getJobs().then(data => data.filter((job) => job.location === $("#filterLocation").value)) //toloweCase
+ 
+ return jobsFilter.then(data => jobsCards(data))
+ 
+}
+
+const filterBySeniority = async () => {
+
+ let jobsFilter = getJobs().then(data => data.filter((job) => job.seniority === $("#filterSeniority").value))
+    
+ return jobsFilter.then(data => jobsCards(data))
+    
+}
+
+const filterByCategory = async () => {
+
+ let jobsFilter = getJobs().then(data => data.filter((job) => job.category === $("#filterCategory").value))
+    
+ return jobsFilter.then(data => jobsCards(data))
+    
+}
+
 //EVENTOS
+
+
+//EVENTO ELEGIR FILTRO
+
+$("#chooseFilter").addEventListener("change",(e) =>{
+
+    //$("#container").innerHTML= ""
+    
+    if (e.target.value === "chooseByLocation"){
+        showElement($("#filterLocation"))
+        hideElement($("#filterSeniority"))
+        hideElement($("#filterCategory"))
+        showElement($("#filterButtons"))
+
+    }    
+    if (e.target.value === "chooseBySeniority"){
+        showElement($("#filterSeniority"))
+        hideElement($("#filterLocation"))
+        hideElement($("#filterCategory"))
+        showElement($("#filterButtons"))
+    
+    }
+    if (e.target.value === "chooseByCategory"){
+       showElement($("#filterCategory"))
+       hideElement($("#filterLocation"))
+       hideElement($("#filterSeniority"))
+       showElement($("#filterButtons"))
+
+    }
+    if(e.target.value === "choose"){
+       hideElement($("#filterLocation"))
+       hideElement($("#filterSeniority"))
+       hideElement($("#filterCategory"))
+       hideElement($("#filterButtons")) 
+    }
+})
+
+//EVENTO BUSCAR
+
+
+$("#searchBtn").addEventListener("click",()=>{
+
+    if($("#chooseFilter").value === "chooseByLocation"){
+       $("#container").innerHTML= ""
+       filterByLocation()
+    }
+    if($("#chooseFilter").value === "chooseBySeniority"){
+        $("#searchBtn").addEventListener("click",()=>{
+            $("#container").innerHTML= ""
+            filterBySeniority()
+        })
+    }
+    if ($("#chooseFilter").value === "chooseByCategory"){
+        $("#searchBtn").addEventListener("click",()=>{
+            $("#container").innerHTML= ""
+            filterByCategory()
+        })
+        
+    }
+})
+
+//EVENTO LIMPIAR
+
+$("#cleanBtn").addEventListener("click",()=>{
+    $("#container").innerHTML= ""
+    getJobs().then(data => jobsCards(data))
+
+    $("#chooseFilter").value = "choose"
+    hideElement($("#filterLocation"))
+    hideElement($("#filterSeniority"))
+    hideElement($("#filterCategory"))
+    hideElement($("#filterButtons")) 
+})
+
+
+//EVENTOS NAV
 
 $("#navJob").addEventListener('click', () =>{
     hideElement($("#filters"))
@@ -233,37 +353,8 @@ $("#navHome").addEventListener('click', () =>{
     getJobs().then(data=>jobsCards(data))
 })
 
-//EVENTO ELEGIR FILTRO
 
-
-$("#chooseFilter").addEventListener("change",(e) =>{
-if (e.target.value === "choice1"){
-    showElement($("#filterLocation"))
-    hideElement($("#filterSeniority"))
-    hideElement($("#filterCategory"))
-    showElement($("#filterButtons"))
-}
-if (e.target.value === "choice2"){
-    showElement($("#filterSeniority"))
-    hideElement($("#filterLocation"))
-    hideElement($("#filterCategory"))
-    showElement($("#filterButtons"))
-}
-if (e.target.value === "choice3"){
-    showElement($("#filterCategory"))
-    hideElement($("#filterLocation"))
-    hideElement($("#filterSeniority"))
-    showElement($("#filterButtons"))
-}
-if(e.target.value === "choice"){
-    hideElement($("#filterLocation"))
-    hideElement($("#filterSeniority"))
-    hideElement($("#filterCategory"))
-    hideElement($("#filterButtons")) 
-}
-})
-
-//FUNCIÓN NAVBAR RESPONSIVE
+//EVENTO NAVBAR RESPONSIVE
 
 $("#btnMenu").addEventListener('click', () => $("#menu").classList.toggle('hidden'))
 
