@@ -266,45 +266,36 @@ $("#newJobForm").addEventListener('submit', (e) =>{
 //FILTROS
 
 const filterByLocation = async () => {
-
- let jobsFilter = getJobs().then(data => data.filter((job) => job.location === $("#filterLocation").value)) //toloweCase
- 
- return jobsFilter.then(data => jobsCards(data))
- 
+    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?location=${$("#filterLocation").value}`)
+    const job = await response.json()
+    return jobsCards(job)
 }
-
 
 const filterBySeniority = async () => {
-
- let jobsFilter = getJobs().then(data => data.filter((job) => job.seniority === $("#filterSeniority").value))
-    
- return jobsFilter.then(data => jobsCards(data))
-    
+    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?seniority=${$("#filterSeniority").value}`)
+    const job = await response.json()
+    return jobsCards(job)
 }
-
 const filterByCategory = async () => {
-
- let jobsFilter = getJobs().then(data => data.filter((job) => job.category === $("#filterCategory").value))
-    
- return jobsFilter.then(data => jobsCards(data))
-    
+    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?category=${$("#filterCategory").value}`)
+    const job = await response.json()
+    return jobsCards(job)
 }
 
 
 //EVENTOS
 
-
-//EVENTO ELEGIR FILTRO
+//EVENTO ELEGIR FILTRO Y BUSCAR
 
 $("#chooseFilter").addEventListener("change",(e) =>{
 
-    //$("#container").innerHTML= ""
-    
     if (e.target.value === "chooseByLocation"){
         showElement($("#filterLocation"))
         hideElement($("#filterSeniority"))
         hideElement($("#filterCategory"))
         showElement($("#filterButtons"))
+        
+        $("#searchBtn").addEventListener("click",()=> filterByLocation())
 
     }    
     if (e.target.value === "chooseBySeniority"){
@@ -312,13 +303,17 @@ $("#chooseFilter").addEventListener("change",(e) =>{
         hideElement($("#filterLocation"))
         hideElement($("#filterCategory"))
         showElement($("#filterButtons"))
-    
+
+        $("#searchBtn").addEventListener("click",()=> filterBySeniority())
+
     }
     if (e.target.value === "chooseByCategory"){
        showElement($("#filterCategory"))
        hideElement($("#filterLocation"))
        hideElement($("#filterSeniority"))
        showElement($("#filterButtons"))
+
+       $("#searchBtn").addEventListener("click",()=> filterByCategory())
 
     }
     if(e.target.value === "choose"){
@@ -329,29 +324,6 @@ $("#chooseFilter").addEventListener("change",(e) =>{
     }
 })
 
-//EVENTO BUSCAR
-
-
-$("#searchBtn").addEventListener("click",()=>{
-
-    if($("#chooseFilter").value === "chooseByLocation"){
-       $("#container").innerHTML= ""
-       filterByLocation()
-    }
-    if($("#chooseFilter").value === "chooseBySeniority"){
-        $("#searchBtn").addEventListener("click",()=>{
-            $("#container").innerHTML= ""
-            filterBySeniority()
-        })
-    }
-    if ($("#chooseFilter").value === "chooseByCategory"){
-        $("#searchBtn").addEventListener("click",()=>{
-            $("#container").innerHTML= ""
-            filterByCategory()
-        })
-        
-    }
-})
 
 //EVENTO LIMPIAR
 
@@ -375,10 +347,18 @@ $("#navJob").addEventListener('click', () =>{
     showElement($("#newJobForm"))
 })
 
+
 $("#navHome").addEventListener('click', () =>{
     showElement($("#spinner"))
     hideElement($("#newJobForm"))
     showElement($("#filters"))
+    $("#chooseFilter").value = "choose"
+
+    hideElement($("#filterLocation"))
+    hideElement($("#filterSeniority"))
+    hideElement($("#filterCategory"))
+    hideElement($("#filterButtons")) 
+
     getJobs().then(data=>jobsCards(data))
 })
 
@@ -387,13 +367,3 @@ $("#navHome").addEventListener('click', () =>{
 
 $("#btnMenu").addEventListener('click', () => $("#menu").classList.toggle('hidden'))
 
-//EVENTO SPINNER
-
-// const ViewSpinner = () => {
-//     showElement($("#spinner"))
-    
-//    // setTimeout(hideElement($("#spinner")), 4000)
-// }
-
-// const spinner = () => {
-// }
