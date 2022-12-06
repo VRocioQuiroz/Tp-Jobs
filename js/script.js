@@ -9,11 +9,13 @@ const showElement = (selector) => selector.classList.remove("hidden")
 
 const getJobs = async () => {
     const response = await fetch("https://6381400d9440b61b0d14b99a.mockapi.io/jobs")
-    const jobs = await response.json()
-    return jobs
+    const jobs = await response.json() 
+    return jobs    
 }
 
 getJobs().then(data => jobsCards(data))
+getJobs().catch(() => failedToLoad())
+
 
 //TRAER UN TRABAJO
 
@@ -23,10 +25,17 @@ const getAJob = async (id) => {
     return job
 }
 
+
 //GENERAR TARJETAS
 
 const jobsCards = (arrayJobs) => {
-    console.log(arrayJobs)
+   
+ $("#container").innerHTML = ""
+   
+ if(arrayJobs){
+
+    hideElement($("#spinner"))
+
     for(const {id, name,description,location,category,seniority,img} of arrayJobs){
         
        $("#container").innerHTML += `
@@ -51,21 +60,27 @@ const jobsCards = (arrayJobs) => {
 
     for (const btn of $$(".btnDetailJob")) {
         btn.addEventListener("click", () => {
+            showElement($("#spinner"))
+
             const jobId = btn.getAttribute("data-id")
+
             getAJob(jobId).then(data => viewJobDetail(data))
 
             hideElement($("#filters"))
-   
+                
         })
     }
-
+ }
 }
 
 //VER DETALLE DE UN TRABAJO
 
 const viewJobDetail = (job) => {
-    const {name, description, location, category, seniority, img, id} = job
-    
+
+    hideElement($("#spinner"))
+
+    const {name, description, location, category, seniority, img, detail, id} = job
+
     $("#container").innerHTML = `
     
     <div id="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
@@ -74,7 +89,8 @@ const viewJobDetail = (job) => {
        </figure>
        <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
             <h3 class="text-xl font-bold underline">${name}</h3>
-            <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
+            <p class="mt-4 px-2 text-sm text-justify sm:text-base">${description}</p>
+            <p class="mb-4 px-2 text-sm text-justify sm:text-base">${detail}</p>
             <div class="flex flex-row">
                <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
                <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
@@ -112,10 +128,22 @@ const viewJobDetail = (job) => {
 
     })
   }
-
-  
-
+    
 }
+
+
+//FUNCION CATCH
+
+const failedToLoad = () => {
+    $("#error").innerHTML = `
+    <div class="w-4/5 h-16 border-red-500 bg-red-200 flex justify-center items-center md:w-3/5">
+       <p class="text-2xl text-red-500 mr-3">Error al cargar la página</p>   
+    </div>`
+
+    hideElement($("#chooseFilter"))
+    hideElement($("#spinner"))
+}
+
 
 //ALERTA DE CONFIRMACION
 
@@ -237,8 +265,6 @@ $("#newJobForm").addEventListener('submit', (e) =>{
 
 //FILTROS
 
-//getJobs().then(data =>getJobs(data))
-
 const filterByLocation = async () => {
 
  let jobsFilter = getJobs().then(data => data.filter((job) => job.location === $("#filterLocation").value)) //toloweCase
@@ -246,6 +272,7 @@ const filterByLocation = async () => {
  return jobsFilter.then(data => jobsCards(data))
  
 }
+
 
 const filterBySeniority = async () => {
 
@@ -262,6 +289,7 @@ const filterByCategory = async () => {
  return jobsFilter.then(data => jobsCards(data))
     
 }
+
 
 //EVENTOS
 
@@ -348,6 +376,7 @@ $("#navJob").addEventListener('click', () =>{
 })
 
 $("#navHome").addEventListener('click', () =>{
+    showElement($("#spinner"))
     hideElement($("#newJobForm"))
     showElement($("#filters"))
     getJobs().then(data=>jobsCards(data))
@@ -358,3 +387,13 @@ $("#navHome").addEventListener('click', () =>{
 
 $("#btnMenu").addEventListener('click', () => $("#menu").classList.toggle('hidden'))
 
+//EVENTO SPINNER
+
+// const ViewSpinner = () => {
+//     showElement($("#spinner"))
+    
+//    // setTimeout(hideElement($("#spinner")), 4000)
+// }
+
+// const spinner = () => {
+// }
