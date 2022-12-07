@@ -186,6 +186,7 @@ const preloadJob = (job) => {
     $("#editLocation").value = job.location
     $("#editSeniority").value = job.seniority
     $("#editCategory").value = job.category
+    $("#editJobDetail").value = job.detail
 
 }
 
@@ -198,7 +199,7 @@ const jobEdited = () => {
         category:$("#editCategory").value ,
         seniority:$("#editSeniority").value,
         img: $("#editJobImg").value ,
-
+        detail: $("#editJobDetail").value,
     }
 }
 
@@ -250,6 +251,7 @@ const saveNewJob = () => {
         category:$("#jobCategory").value,
         seniority:$("#jobSeniority").value,
         img:$("#jobImg").value,
+        detail:$("#jobDetail").value
     }
     
 }
@@ -343,6 +345,7 @@ $("#cleanBtn").addEventListener("click",()=>{
 
 $("#navJob").addEventListener('click', () =>{
     hideElement($("#filters"))
+    hideElement($("#editJobForm"))
     $("#container").innerHTML= ""
     showElement($("#newJobForm"))
 })
@@ -359,7 +362,7 @@ $("#navHome").addEventListener('click', () =>{
     hideElement($("#filterCategory"))
     hideElement($("#filterButtons")) 
 
-    getJobs().then(data=>jobsCards(data))
+    getJobs().then(data => jobsCards(data))
 })
 
 
