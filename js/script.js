@@ -90,7 +90,10 @@ const viewJobDetail = (job) => {
        <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
             <h3 class="text-xl font-bold underline">${name}</h3>
             <p class="mt-4 px-2 text-sm text-justify sm:text-base">${description}</p>
-            <p class="mb-4 px-2 text-sm text-justify sm:text-base">${detail}</p>
+            <a id="seeMore" class="showDetail mb-2 text-blue-600 text-center underline block">Ver más detalles</a>
+            <a id="seeLess" class="showDetail mb-2 text-blue-600 text-center underline block hidden">Ocultar detalles</a>
+            <p id="seeDetail" class="mb-4 px-2 text-sm text-justify sm:text-base hidden">${detail}</p>
+            
             <div class="flex flex-row">
                <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
                <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
@@ -128,9 +131,19 @@ const viewJobDetail = (job) => {
 
     })
   }
-    
+   
+  //Ver más detalles
+  
+  for (const btn of $$(".showDetail")) {
+    btn.addEventListener("click", () => {
+        
+        $("#seeLess").classList.toggle('hidden')
+        $("#seeMore").classList.toggle('hidden')
+        $("#seeDetail").classList.toggle('hidden')
+               
+    })
+  }
 }
-
 
 //FUNCION CATCH
 
@@ -267,23 +280,11 @@ $("#newJobForm").addEventListener('submit', (e) =>{
 
 //FILTROS
 
-const filterByLocation = async () => {
-    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?location=${$("#filterLocation").value}`)
+const filterBy = async (filterOption, filterValue) => {
+    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?${filterOption}=${filterValue}`)
     const job = await response.json()
     return jobsCards(job)
 }
-
-const filterBySeniority = async () => {
-    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?seniority=${$("#filterSeniority").value}`)
-    const job = await response.json()
-    return jobsCards(job)
-}
-const filterByCategory = async () => {
-    const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?category=${$("#filterCategory").value}`)
-    const job = await response.json()
-    return jobsCards(job)
-}
-
 
 //EVENTOS
 
@@ -297,7 +298,7 @@ $("#chooseFilter").addEventListener("change",(e) =>{
         hideElement($("#filterCategory"))
         showElement($("#filterButtons"))
         
-        $("#searchBtn").addEventListener("click",()=> filterByLocation())
+        $("#searchBtn").addEventListener("click",()=> filterBy("location", $("#filterLocation").value))
 
     }    
     if (e.target.value === "chooseBySeniority"){
@@ -306,7 +307,7 @@ $("#chooseFilter").addEventListener("change",(e) =>{
         hideElement($("#filterCategory"))
         showElement($("#filterButtons"))
 
-        $("#searchBtn").addEventListener("click",()=> filterBySeniority())
+        $("#searchBtn").addEventListener("click",()=> filterBy("seniority", $("#filterSeniority").value))
 
     }
     if (e.target.value === "chooseByCategory"){
@@ -315,7 +316,7 @@ $("#chooseFilter").addEventListener("change",(e) =>{
        hideElement($("#filterSeniority"))
        showElement($("#filterButtons"))
 
-       $("#searchBtn").addEventListener("click",()=> filterByCategory())
+       $("#searchBtn").addEventListener("click",()=> filterBy("category", $("#filterCategory").value))
 
     }
     if(e.target.value === "choose"){
@@ -339,7 +340,6 @@ $("#cleanBtn").addEventListener("click",()=>{
     hideElement($("#filterCategory"))
     hideElement($("#filterButtons")) 
 })
-
 
 //EVENTOS NAV
 
