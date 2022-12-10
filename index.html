@@ -15,9 +15,9 @@
 
     <nav class="flex items-center justify-between flex-wrap bg-indigo-700 p-6">
 
-      <div id="icon" class="flex items-center flex-shrink-0 text-white mr-6">
-          <!-- <div class="m-3"><i></i></div> -->
-        <span class="font-semibold text-xl tracking-tight">JobPortal</span>
+      <div id="icon" class="flex items-center flex-row flex-shrink-0 text-3xl text-white mr-6">
+        <span class="font-semibold tracking-tight">JobPortal</span>
+        <div class="m-3"><i class="fa-sharp fa-solid fa-people-carry-box"></i></div> 
       </div>
 
       <div class="block lg:hidden">
@@ -27,7 +27,7 @@
       </div>
 
       <div id='menu' class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div class="text-sm font-extrabold  lg:flex-grow">
+        <div class="text-xl font-extrabold  lg:flex-grow">
           <a href="#responsive-header" id="navHome" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-indigo-200 mr-4">
             Home
           </a>
@@ -52,14 +52,14 @@
 
 <section id="filters" class="w-full mt-4 flex flex-col justify-center items-center">
   
-  <select id="chooseFilter" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8">
+  <select id="chooseFilter" class="w-4/5 my-2 h-12 text-xl border border-indigo-700 rounded-md md:w-4/5 md:mx-8">
     <option value="choose">Elegir filtro</option>
     <option value="chooseByLocation">Zona</option>
     <option value="chooseBySeniority">Grado</option>
     <option value="chooseByCategory">Categoría</option>
   </select>
 
-  <select id="filterLocation" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
+  <select id="filterLocation" class="w-4/5 my-2 h-12 text-xl border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
     <option>CABA</option>
     <option>Gran Bs.As. Norte</option>
     <option>Gran Bs.As. Sur</option>
@@ -68,23 +68,23 @@
     
   </select>
 
-  <select id="filterSeniority" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
+  <select id="filterSeniority" class="w-4/5 my-2 h-12 text-xl border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
     <option>Licenciado</option>
     <option>Técnico</option>
     <option>Auxiliar</option>
     
   </select>
 
-  <select id="filterCategory" class="w-4/5 my-2 h-10 border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
+  <select id="filterCategory" class="w-4/5 my-2 h-12 text-xl border border-indigo-700 rounded-md md:w-4/5 md:mx-8 hidden">
     <option>Diag. por imágenes</option>
     <option>Quirófano</option>
     <option>Farmacia</option>
     <option>Multisectorial</option>
   </select>
 
-  <div id="filterButtons" class="w-full flex justify-center md:w-2/5 hidden">
-    <button id="searchBtn" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Buscar</button>
-    <button id="cleanBtn" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">Limpiar</button>
+  <div id="filterButtons" class="w-full  text-lg flex justify-center md:w-2/5 hidden">
+    <button id="searchBtn" class="w-1/3 h-12 m-1 rounded-md bg-indigo-700 text-white font-bold">Buscar</button>
+    <button id="cleanBtn" class="w-1/3 h-12 m-1 rounded-md bg-indigo-700 text-white font-bold">Limpiar</button>
   </div>
 
 </section>
@@ -113,28 +113,28 @@
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobImg" class="text-lg font-bold">Img(src)</label>
-      <input type="text" id="jobImg" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+      <input type="text" id="jobImg" class="w-full h-10 border border-indigo-700 rounded-md" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobTitle" class="text-lg font-bold">Job title</label>
-      <input type="text" id="jobTitle" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+      <input type="text" id="jobTitle" class="w-full h-10 border border-indigo-700 rounded-md " maxlength="20" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobDescription" class="text-lg font-bold">Description</label>
-      <textarea id="jobDescription" name="textarea" rows="5" cols="20" class="w-full border border-indigo-700 rounded-md capitalize"></textarea>
+      <textarea id="jobDescription" name="textarea" rows="5" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobDetail" class="text-lg font-bold">Información adicional (detalles)</label>
-      <textarea id="jobDetail" name="textarea" rows="4" cols="20" class="w-full border border-indigo-700 rounded-md capitalize"></textarea>
+      <textarea id="jobDetail" name="textarea" rows="4" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobTags" class="text-lg font-bold">Tags</label>
 
-      <select id="jobLocation" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize">
+      <select id="jobLocation" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md">
         <option>Location</option>
         <option>CABA</option>
         <option>Gran Bs.As. Norte</option>
@@ -144,7 +144,7 @@
                     
       </select>
       
-      <select id="jobSeniority" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize">
+      <select id="jobSeniority" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md">
         <option>Seniority</option>
         <option>Licenciado</option>
         <option>Técnico</option>
@@ -152,7 +152,7 @@
                     
       </select>
       
-      <select id="jobCategory" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize">
+      <select id="jobCategory" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md">
         <option>Category</option>
         <option>Diag. por imágenes</option>
         <option>Quirófano</option>
@@ -180,28 +180,28 @@
 
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobImg" class="text-lg font-bold">Img(src)</label>
-      <input type="text" id="editJobImg" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+      <input type="text" id="editJobImg" class="w-full h-10 border border-indigo-700 rounded-md" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobTitle" class="text-lg font-bold">Job title</label>
-      <input type="text" id="editJobTitle" class="w-full h-10 border border-indigo-700 rounded-md capitalize" maxlength="20" required>
+      <input type="text" id="editJobTitle" class="w-full h-10 border border-indigo-700 rounded-md " maxlength="20" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobDescription" class="text-lg font-bold">Description</label>
-      <textarea id="editJobDescription" name="textarea" rows="5" cols="20" class="w-full border border-indigo-700 rounded-md capitalize"></textarea>
+      <textarea id="editJobDescription" name="textarea" rows="5" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
     </div>
     
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobDetail" class="text-lg font-bold">Información adicional (detalles)</label>
-      <textarea id="editJobDetail" name="textarea" rows="4" cols="20" class="w-full border border-indigo-700 rounded-md capitalize"></textarea>
+      <textarea id="editJobDetail" name="textarea" rows="4" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobTags" class="text-lg font-bold">Tags</label>
 
-      <select id="editLocation" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize">
+      <select id="editLocation" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md">
         <option>Location</option>
         <option>CABA</option>
         <option>Gran Bs.As. Norte</option>
@@ -211,7 +211,7 @@
               
       </select>
 
-      <select id="editSeniority" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize">
+      <select id="editSeniority" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md">
         <option>Seniority</option>
         <option>Licenciado</option>
         <option>Técnico</option>
@@ -219,7 +219,7 @@
               
       </select>
 
-      <select id="editCategory" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md capitalize">
+      <select id="editCategory" class="w-full p-2 h-10 my-1 border border-indigo-700 rounded-md">
         <option>Category</option>
         <option>Diag. por imágenes</option>
         <option>Quirófano</option>
@@ -238,6 +238,23 @@
   </form>
 
 </section>
+
+<footer class="w-full h-55 bg-indigo-700">
+  <div class="flex justify-center text-white">
+    <span class="mt-4 font-semibold text-xl tracking-tight md:text-3xl xl:text-4xl">JobPortal</span>
+    <div class="mt-4 mx-2 md:text-3xl xl:text-4xl"><i class="fa-sharp fa-solid fa-people-carry-box"></i></div> 
+  </div>
+
+  <a class="mt-3 flex justify-center text-white text-center underline md:text-xl xl:text-2xl ">Condiciones de contratación</a>
+  
+  <div class="mt-3 flex justify-center items-center flex-col md:text-lg xl:text-2xl">
+    <p class="font-semibold">Oficina comercial:</p>
+     <p>Rincón 7855, CABA, Argentina</p>
+
+  </div>
+
+  <span class="mt-4 pb-2 flex justify-center">© Copyright 2022 JobPortal</span>
+</footer>
 
 <script src="js/script.js"></script>   
 
