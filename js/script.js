@@ -39,20 +39,20 @@ const jobsCards = (arrayJobs) => {
     for(const {id, name,description,location,category,seniority,img} of arrayJobs){
         
        $("#container").innerHTML += `
-        <div id ="card-${id}" class="w-[96%] h-full my-3 border border-2 rounded-md shadow-2xl sm:w-2/5 sm:m-1 lg:w-1/3 xl:w-1/6">
-            <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
+        <div id ="card-${id}" class="w-[96%] h-[700px] my-3 border border-2 rounded-md shadow-2xl sm:px-1 sm:w-1/2 md:mx-4 md:w-2/5 lg:w-1/3 xl:mx-2 xl:w-1/5 xl:h-[760px]">
+            <figure class ="w-full flex mt-2 justify-center items-center">
               <img src="${img}" alt="job" class="w-full h-[170px]">
             </figure>
-            <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
-                <h3 class="text-2xl text-center font-bold">${name}</h3>
-                <p class="my-4 p-2 text-xl text-justify sm:text-base">${description}</p>
+            <div id ="contents" class="h-2/3 mt-2 p-2 flex flex-col justify-center items-center">
+                <h3 class="mb-2 sm:m-0 text-2xl text-center font-bold xl:mt-2">${name}</h3>
+                <p class="mt-4 p-2 text-xl text-center sm:text-lg xl:text-xl">${description}</p>
             
-                <div class="flex flex-row">
-                   <div id="locationDiv" class="m-1 px-1 flex items-center bg-pink-400 text-base text-center font-bold rounded-md md:text-base">${location}</div>
-                   <div id="categoryDiv" class="m-1 px-1 flex items-center bg-yellow-400 text-base text-center font-bold rounded-md md:text-base ">${category}</div>
-                   <div id="seniorityDiv" class="m-1 px-1 flex items-center bg-orange-400 text-base text-center font-bold rounded-md md:text-base">${seniority}</div>
+                <div class="flex flex-row my-3 h-20">
+                   <div id="locationDiv" class="m-1 px-2 flex items-center bg-pink-400 text-sm text-center font-bold rounded-md hover:bg-pink-600">${location}</div>
+                   <div id="categoryDiv" class="m-1 px-2 flex items-center bg-yellow-400 text-sm text-center font-bold rounded-md hover:bg-yellow-600">${category}</div>
+                   <div id="seniorityDiv" class="m-1 px-2 flex items-center bg-orange-400 text-sm text-center font-bold rounded-md hover:bg-orange-600">${seniority}</div>
                 </div>
-                <button class="w-2/3 h-14 my-2 rounded-md shadow-md bg-indigo-700 text-xl text-white font-bold btnDetailJob" data-id="${id}">Ver detalles</button>
+                <button class="w-2/3 h-14 mt-2 sm:h-10 rounded-md shadow-md bg-indigo-700 text-xl text-white font-bold hover:bg-indigo-500 duration-500 active:scale-50 btnDetailJob" data-id="${id}">Ver detalles</button>
             </div>
         </div>
         `
@@ -83,21 +83,21 @@ const viewJobDetail = (job) => {
 
     $("#container").innerHTML = `
     
-    <div id="card-${id}" class="w-5/6 h-full my-4 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
+    <div id="card-${id}" class="w-[96%] h-full my-4 border border-2 rounded-md shadow-2xl sm:w-1/2 xl:2/3 xl:py-4">
        <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
             <img src="${img}" alt="job" class="w-full h-[170px]">
        </figure>
        <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
             <h3 class="text-3xl font-bold text-center">${name}</h3>
-            <p class="mt-4 px-2 text-2xl">${description}</p>
+            <p class="mt-4 px-2 text-2xl text-center">${description}</p>
             <a id="seeMore" class="showDetail my-4 text-xl  text-blue-600 text-center underline block">Ver más detalles</a>
             <a id="seeLess" class="showDetail my-4 text-xl text-blue-600 text-center underline block hidden">Ocultar detalles</a>
-            <p id="seeDetail" class="mb-4 px-2 text-2xl hidden">${detail}</p>
+            <p id="seeDetail" class="mb-4 px-2 text-2xl text-center hidden">${detail}</p>
             
             <div class="flex flex-row">
-               <div id="locationDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-pink-400 text-lg text-center font-bold rounded-md">${location}</div>
-               <div id="categoryDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-yellow-400 text-lg text-center font-bold rounded-md ">${category}</div>
-               <div id="seniorityDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-orange-400 text-lg text-center font-bold rounded-md">${seniority}</div>
+               <div id="locationDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-pink-400 text-xl text-center font-bold rounded-md">${location}</div>
+               <div id="categoryDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-yellow-400 text-xl text-center font-bold rounded-md ">${category}</div>
+               <div id="seniorityDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-orange-400 text-xl text-center font-bold rounded-md">${seniority}</div>
             </div>
           
         </div>
@@ -116,6 +116,7 @@ const viewJobDetail = (job) => {
 
         const jobId = btn.getAttribute("data-id")
         alertConfirm(jobId)
+    
     })
   }
    
@@ -162,12 +163,12 @@ const failedToLoad = () => {
 
 const alertConfirm = (id) => {
     getAJob(id).then(data => $("#confirm").innerHTML = `
-    <div class="w-4/5 h-16 border-red-500 bg-red-200 flex justify-center items-center md:w-3/5">
-       <p class="text-red-500 mr-3">¿Estás seguro de eliminar ${data.name}?</p>
-       <button id="${data.id}" class="w-1/3 h-10 m-1 rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Eliminar trabajo</button>
-       <button class="w-1/3 h-10 m-1 rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancelDeleteJob()">Cancelar</button>
+    <div class="w-4/5 h-20 px-2 py-6 lg:h-24 border-red-500 bg-red-200 flex justify-center items-center md:w-5/6">
+       <p class="text-red-500 mr-3 lg:text-2xl">¿Estás seguro de eliminar ${data.name}?</p>
+       <button id="${data.id}" class="w-1/3 h-10 m-1 lg:w-1/5 lg:h-14 lg:text-lg rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Eliminar trabajo</button>
+       <button class="w-1/3 h-10 lg:h-14 m-1 lg:w-1/5 lg:text-lg  rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancelDeleteJob()">Cancelar</button>
     </div>`)
-       
+      
 }
 
 //CANCELAR ELIMINACION DE TRABAJO
@@ -272,8 +273,8 @@ const saveNewJob = () => {
 
 $("#newJobForm").addEventListener('submit', (e) =>{
     e.preventDefault()
-    hideElement($("#newJobForm"))
     postNewJob()
+    $("#formCreateJob").reset()
 })
 
 
@@ -370,3 +371,16 @@ $("#navHome").addEventListener('click', () =>{
 
 $("#btnMenu").addEventListener('click', () => $("#menu").classList.toggle('hidden'))
 
+//EVENTO CONDICIONES
+
+$("#conditions").addEventListener('click', ()=>{
+    showElement($("#conditionsContainer"))
+    hideElement($("#container"))
+    hideElement($("#newJobForm"))
+    hideElement($("#editJobForm"))
+    hideElement($("#filters"))
+    hideElement($("#filterLocation"))
+    hideElement($("#filterSeniority"))
+    hideElement($("#filterCategory"))
+    hideElement($("#filterButtons")) 
+})

@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/people-carry-box-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>JobPortal</title>
 </head>
 
-<body class="w-full">
+<body class="w-full h-full m-0 box-border static">
 
   <header>
 
@@ -109,26 +110,26 @@
 
 <section id="newJobForm" class="w-full my-4 flex flex-col justify-center items-center hidden">
 
-  <form action="" class="w-full md:max-w-3xl">
+  <form id="formCreateJob" class="w-full md:max-w-3xl">
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobImg" class="text-lg font-bold">Img(src)</label>
-      <input type="text" id="jobImg" class="w-full h-10 border border-indigo-700 rounded-md" required>
+      <input type="text" id="jobImg" class="w-full h-10 pl-2 border border-indigo-700 rounded-md" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobTitle" class="text-lg font-bold">Job title</label>
-      <input type="text" id="jobTitle" class="w-full h-10 border border-indigo-700 rounded-md " maxlength="20" required>
+      <input type="text" id="jobTitle" class="w-full h-10 pl-2 border border-indigo-700 rounded-md " maxlength="30" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobDescription" class="text-lg font-bold">Description</label>
-      <textarea id="jobDescription" name="textarea" rows="5" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
+      <textarea id="jobDescription" name="textarea" rows="5" cols="20" class="w-full pl-2 border border-indigo-700 rounded-md "></textarea>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="jobDetail" class="text-lg font-bold">Información adicional (detalles)</label>
-      <textarea id="jobDetail" name="textarea" rows="4" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
+      <textarea id="jobDetail" name="textarea" rows="4" cols="20" class="w-full pl-2 border border-indigo-700 rounded-md "></textarea>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
@@ -164,7 +165,7 @@
     </div>
 
     <div class="m-2">
-      <input id="submitNewJob" type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">
+      <input id="submitNewJob" type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold hover:bg-indigo-500 active:ease-linear active:duration-500 active:scale-50">
     </div>
 
        
@@ -176,26 +177,26 @@
 
 <section id="editJobForm" class="w-full my-4 flex flex-col justify-center items-center hidden">
 
-  <form id="editForm" action="" class="w-full md:max-w-3xl">
+  <form id="editForm" class="w-full md:max-w-3xl">
 
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobImg" class="text-lg font-bold">Img(src)</label>
-      <input type="text" id="editJobImg" class="w-full h-10 border border-indigo-700 rounded-md" required>
+      <input type="text" id="editJobImg" class="w-full h-10 pl-2 border border-indigo-700 rounded-md" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobTitle" class="text-lg font-bold">Job title</label>
-      <input type="text" id="editJobTitle" class="w-full h-10 border border-indigo-700 rounded-md " maxlength="20" required>
+      <input type="text" id="editJobTitle" class="w-full h-10 pl-2 border border-indigo-700 rounded-md " maxlength="30" required>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobDescription" class="text-lg font-bold">Description</label>
-      <textarea id="editJobDescription" name="textarea" rows="5" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
+      <textarea id="editJobDescription" name="textarea" rows="5" cols="20" class="w-full pl-2 border border-indigo-700 rounded-md "></textarea>
     </div>
     
     <div class="m-2 flex flex-col justify-center">
       <label for="editJobDetail" class="text-lg font-bold">Información adicional (detalles)</label>
-      <textarea id="editJobDetail" name="textarea" rows="4" cols="20" class="w-full border border-indigo-700 rounded-md "></textarea>
+      <textarea id="editJobDetail" name="textarea" rows="4" cols="20" class="w-full pl-2 border border-indigo-700 rounded-md "></textarea>
     </div>
 
     <div class="m-2 flex flex-col justify-center">
@@ -231,7 +232,7 @@
     </div>
 
     <div class="m-2">
-      <input id="submitEdited" type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold">
+      <input id="submitEdited" type="submit" value="Submit" class="w-1/3 h-10 m-1 rounded-md bg-indigo-700 text-white font-bold hover:bg-indigo-500 duration-500 active:scale-50">
     </div>
 
        
@@ -239,13 +240,39 @@
 
 </section>
 
-<footer class="w-full h-55 bg-indigo-700">
+<section id="conditionsContainer" class="hidden w-full pl-1 border border-2 rounded-md shadow-2xl">
+  <h2 class="my-3 text-xl text-center text-blue-700">TÉRMINOS Y CONDICIONES GENERALES DE CONTRATACIÓN</h2>
+  <p>Esta sección establece los Términos y Condiciones de Contratación (en adelante, las "Condiciones") (en adelante, los "Servicios"), a través del sitio web especificado (en adelante, el "Sitio Web"). El Sitio Web y los Servicios son prestados por la eempresa (en adelante, "PORTAL JOB").
+    En adelante, el término "Solicitante" será utilizado para hacer referencia a todas las personas físicas y/o jurídicas que deseen contratar los Servicios que se rigen por estas Condiciones.</p>
+  <h4>1. CONTRATACIÓN</h4>
+  <p>Los Servicios serán puestos a disposición del Solicitante dentro de los treinta (30) días siguientes a la aceptación de éstas Condiciones. Dicha aceptación será notificada por el Solicitante a PORTAL JOB, una vez que el Solicitante cree su Usuario y acepte las Condiciones al momento de completar el formulario de registro, detallado en el Sitio Web.</p>
+  <h4>2. ACCESO AL SITIO WEB</h4>
+  <h6>2.1. Acceso a los Servicios</h6>
+  <p>A los efectos de acceder a los Servicios, el Solicitante deberá crear un Nombre de Usuario y una Contraseña. El Nombre de Usuario no podrá contener o consistir en palabras, expresiones o conjuntos gráfico-denominativos malsonantes, injuriosos, coincidentes con marcas, nombres comerciales, rótulos de establecimientos, denominaciones sociales, expresiones publicitarias, nombres y seudónimos de personajes de relevancia pública o famosos para cuya utilización no esté autorizado y, en general, contrarios a la ley o a las exigencias de la moral y buenas costumbres. El Solicitante es el único y exclusivo responsable por la confidencialidad de su Contraseña. En caso de pérdida, robo o vulneración en la seguridad del Nombre de Usuario y Contraseña, el Solicitante se compromete a comunicar a PORTAL JOB a la mayor brevedad dicha situación, como así también cualquier riesgo de acceso a las mismas por un tercero no autorizado.</p>
+  <h4>3. UTILIZACIÓN DEL SITIO WEB</h4>
+  <p>El Solicitante se obliga a abstenerse de utilizar el Sitio Web y/o los Servicios con fines o efectos ilícitos, contrarios a lo establecido en estas Condiciones, lesivos de los derechos e intereses de terceros, incluyendo clientes de PORTAL JOB, o que de cualquier forma puedan dañar, inutilizar, sobrecargar o deteriorar el Sitio Web o impedir la normal utilización del Sitio Web por parte de los usuarios.</p>
+  <h4>4. CONDICIONES COMERCIALES</h4>
+  <p>Como contraprestación por la prestación de los Servicios, el Solicitante se obliga a abonar a PORTAL JOB los cargos indicados en la orden particular en función de cada servicio contratado. La fecha y forma de pago será la que pacten las partes al momento de la contratación de los Servicios o en su defecto dentro de los 15 días de la fecha de facturación. El Servicio no incluye costos ni servicio de conexión a Internet ni ninguna otra prestación y/o servicio que no esté expresamente detallada en la orden particular, los cuales son a cargo y costo total y exclusivo del Solicitante.</p>
+  <h4>5. DISPONIBILIDAD DEL SERVICIO</h4>
+  <p>PORTAL JOB no garantiza la disponibilidad ininterrumpida de los Servicios, ni su funcionamiento libre de errores. El Solicitante reconoce y acepta expresamente que PORTAL JOB, sus sociedades controladas, controlantes, vinculadas y empresas intervinientes en la prestación del Servicio, NO SERÁN EN MODO ALGUNO RESPONSABLES POR LA SUSPENSIÓN Y/O INTERRUPCIÓN DEL SERVICIO Y/O FALLAS EN LA PROVISIÓN DEL SERVICIO, NI RESULTAN POR ENDE EN MODO ALGUNO RESPONSABLES POR LOS DAÑOS Y PERJUICIOS QUE PUDIERAN DERIVARSE DE ELLO.</p>
+  <h4>6. TERMINACIÓN</h4>
+  <p>6.1. PORTAL JOB podrá terminar anticipadamente la relación contractual con el Solicitante y por ende la prestación del Servicio, sin necesidad de invocar causa alguna, debiendo al efecto preavisar en forma fehaciente con por lo menos treinta (30) días de anticipación a la fecha de terminación.</p>
+  <p>6.2. El incumplimiento por el Solicitante a cualquiera de las obligaciones a su cargo consignadas en las presentes Condiciones o en las condiciones particulares que pudieran aplicar a cada Servicio, que no fueran subsanadas dentro de los cinco (5) días de recibida la intimación al cumplimiento por parte de PORTAL JOB, facultará a PORTAL JOB, a optar por: (a) tener por resuelto el presente automáticamente y de pleno derecho; o (b) exigir el cumplimiento de la prestación debida, en ambos casos con más la indemnización de los daños y perjuicios ocasionados.</p>
+  <p>6.3. Extinción anticipada por causas vinculadas con la solvencia del Solicitante: PORTAL JOB podrá tener por resuelto el vínculo contractual en caso de mediar un pedido de quiebra, presentación en concurso preventivo, cesación de pagos, tramitación de un acuerdo preventivo extrajudicial (APE) o cualquier otra circunstancia que manifieste razonablemente una disminución de la solvencia del Solicitante o de su capacidad en el cumplimiento de las obligaciones asumidas, conforme las presentes Condiciones y/o las condiciones particulares que pudieran aplicar a cada Servicio.
+    En este supuesto PORTAL JOB deberá notificar al Solicitante su voluntad de resolver el vínculo en forma fehaciente sin necesidad de ningún otro requisito adicional. El ejercicio de esta opción no generará a favor del Solicitante derecho a percibir suma alguna por ningún concepto, en especial por daños y perjuicios, lucro cesante o ganancias perdidas, daño emergente, etc.</p>
+  <h4>7. GENERAL</h4>
+  <p>7.1. En caso de declararse la nulidad de alguna de las cláusulas de éstas Condiciones Generales, tal nulidad no afectará a la validez de las restantes, las cuales mantendrán su plena vigencia y efecto.</p>
+  <p>7.2. PORTAL JOB se reserva el derecho a modificar total o parcialmente estas Condiciones en cualquier momento. En caso de llevar a cabo alguna modificación, PORTAL JOB notificará al Solicitante a la dirección de correo electrónico registrada para utilizar el Sitio Web y los Servicios. El Solicitante acepta que la notificación por parte de PORTAL JOB a dicha dirección de correo electrónico tendrá plena validez como notificación suficiente, y renuncia a cualquier tipo de impugnación respecto de las notificaciones cursadas por PORTAL JOB a tal dirección de correo electrónico. Asimismo, si el Solicitante persiste en la utilización de los Servicios y/o el Sitio Web, se considerará que ha aceptado implícitamente las nuevas Condiciones.</p>
+  <p>7.3. Estas Condiciones, junto con la Política de Privacidad, los Términos y Condiciones de Uso del Sitio Web y las condiciones particulares que pudieran corresponder a cada Servicio constituyen la totalidad del acuerdo entre el Solicitante y PORTAL JOB.</p>
+</section>
+
+<footer id="footerSection" class="w-full h-55 bg-indigo-700 bottom-0 relative">
   <div class="flex justify-center text-white">
     <span class="mt-4 font-semibold text-xl tracking-tight md:text-3xl xl:text-4xl">JobPortal</span>
     <div class="mt-4 mx-2 md:text-3xl xl:text-4xl"><i class="fa-sharp fa-solid fa-people-carry-box"></i></div> 
   </div>
 
-  <a class="mt-3 flex justify-center text-white text-center underline md:text-xl xl:text-2xl ">Condiciones de contratación</a>
+  <a id="conditions" class="mt-3 flex justify-center text-white text-center underline md:text-xl xl:text-2xl ">Condiciones de contratación</a>
   
   <div class="mt-3 flex justify-center items-center flex-col md:text-lg xl:text-2xl">
     <p class="font-semibold">Oficina comercial:</p>
