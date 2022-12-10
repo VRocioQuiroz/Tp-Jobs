@@ -39,20 +39,20 @@ const jobsCards = (arrayJobs) => {
     for(const {id, name,description,location,category,seniority,img} of arrayJobs){
         
        $("#container").innerHTML += `
-        <div id ="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
+        <div id ="card-${id}" class="w-[96%] h-full my-3 border border-2 rounded-md shadow-2xl sm:w-2/5 sm:m-1 lg:w-1/3 xl:w-1/6">
             <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
-              <img src=${img}" alt="job" class="w-full h-[170px]">
+              <img src="${img}" alt="job" class="w-full h-[170px]">
             </figure>
             <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
-                <h3 class="text-xl text-center font-bold underline">${name}</h3>
-                <p class="my-4 p-2 text-sm text-justify sm:text-base">${description}</p>
+                <h3 class="text-2xl text-center font-bold">${name}</h3>
+                <p class="my-4 p-2 text-xl text-justify sm:text-base">${description}</p>
             
                 <div class="flex flex-row">
-                   <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
-                   <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
-                   <div id="seniorityDiv" class="m-1 px-1 bg-orange-400 text-sm text-center font-bold rounded-md">${seniority}</div>
+                   <div id="locationDiv" class="m-1 px-1 flex items-center bg-pink-400 text-base text-center font-bold rounded-md md:text-base">${location}</div>
+                   <div id="categoryDiv" class="m-1 px-1 flex items-center bg-yellow-400 text-base text-center font-bold rounded-md md:text-base ">${category}</div>
+                   <div id="seniorityDiv" class="m-1 px-1 flex items-center bg-orange-400 text-base text-center font-bold rounded-md md:text-base">${seniority}</div>
                 </div>
-                <button class="w-2/3 h-10 my-2 rounded-md shadow-md bg-indigo-700 text-white font-bold btnDetailJob" data-id="${id}">Ver detalles</button>
+                <button class="w-2/3 h-14 my-2 rounded-md shadow-md bg-indigo-700 text-xl text-white font-bold btnDetailJob" data-id="${id}">Ver detalles</button>
             </div>
         </div>
         `
@@ -83,28 +83,28 @@ const viewJobDetail = (job) => {
 
     $("#container").innerHTML = `
     
-    <div id="card-${id}" class="w-5/6 h-full my-3 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
+    <div id="card-${id}" class="w-5/6 h-full my-4 border border-2 rounded-md shadow-2xl sm:w-1/3 sm:m-3 md:w-1/4 lg:w-1/5 xl:w-1/6">
        <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
-            <img src=${img}" alt="job" class="w-full h-[170px]">
+            <img src="${img}" alt="job" class="w-full h-[170px]">
        </figure>
        <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
-            <h3 class="text-xl font-bold underline">${name}</h3>
-            <p class="mt-4 px-2 text-sm text-justify sm:text-base">${description}</p>
-            <a id="seeMore" class="showDetail mb-2 text-blue-600 text-center underline block">Ver más detalles</a>
-            <a id="seeLess" class="showDetail mb-2 text-blue-600 text-center underline block hidden">Ocultar detalles</a>
-            <p id="seeDetail" class="mb-4 px-2 text-sm text-justify sm:text-base hidden">${detail}</p>
+            <h3 class="text-3xl font-bold text-center">${name}</h3>
+            <p class="mt-4 px-2 text-2xl">${description}</p>
+            <a id="seeMore" class="showDetail my-4 text-xl  text-blue-600 text-center underline block">Ver más detalles</a>
+            <a id="seeLess" class="showDetail my-4 text-xl text-blue-600 text-center underline block hidden">Ocultar detalles</a>
+            <p id="seeDetail" class="mb-4 px-2 text-2xl hidden">${detail}</p>
             
             <div class="flex flex-row">
-               <div id="locationDiv" class="m-1 px-1 bg-pink-400 text-sm text-center font-bold rounded-md">${location}</div>
-               <div id="categoryDiv" class="m-1 px-1 bg-yellow-400 text-sm text-center font-bold rounded-md ">${category}</div>
-               <div id="seniorityDiv" class="m-1 px-1 bg-orange-400 text-sm text-center font-bold rounded-md">${seniority}</div>
+               <div id="locationDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-pink-400 text-lg text-center font-bold rounded-md">${location}</div>
+               <div id="categoryDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-yellow-400 text-lg text-center font-bold rounded-md ">${category}</div>
+               <div id="seniorityDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-orange-400 text-lg text-center font-bold rounded-md">${seniority}</div>
             </div>
           
         </div>
 
         <div class="flex w-full justify-center">
-            <button data-id="${id}" class="btnEditJob w-1/3 h-10 m-2 rounded-md shadow-md bg-green-400 text-white font-bold" >Edit</button>
-            <button data-id="${id}" class="btnDeleteJob w-1/3 h-10 m-2 rounded-md shadow-md bg-red-400 text-white font-bold" >Delete</button>  
+            <button data-id="${id}" class="btnEditJob w-1/3 h-14 m-2 rounded-md shadow-md bg-green-400 text-xl text-white font-bold" >Edit</button>
+            <button data-id="${id}" class="btnDeleteJob w-1/3 h-14 m-2 rounded-md shadow-md bg-red-400 text-xl text-white font-bold" >Delete</button>  
         </div>
     </div>
     `
@@ -234,7 +234,6 @@ const editJob = (id) => {
 $("#editForm").addEventListener("submit", (e) => {
     e.preventDefault()
     const id = $("#submitEdited").getAttribute("data-id")
-    console.log(id)
     editJob(id)
 })
 
@@ -354,6 +353,7 @@ $("#navJob").addEventListener('click', () =>{
 $("#navHome").addEventListener('click', () =>{
     showElement($("#spinner"))
     hideElement($("#newJobForm"))
+    hideElement($("#editJobForm"))
     showElement($("#filters"))
     $("#chooseFilter").value = "choose"
 
