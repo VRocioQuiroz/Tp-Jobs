@@ -22,9 +22,9 @@ getJobs().catch(() => failedToLoad())
 const getAJob = async (id) => {
     const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs/${id}`)
     const job = await response.json()
+    .catch(() => alert("No se puede ver el detalle en este momento"))
     return job
 }
-
 
 //GENERAR TARJETAS
 
@@ -61,7 +61,7 @@ const jobsCards = (arrayJobs) => {
     for (const btn of $$(".btnDetailJob")) {
         btn.addEventListener("click", () => {
             showElement($("#spinner"))
-
+            $("#container").innerHTML = ""
             const jobId = btn.getAttribute("data-id")
 
             getAJob(jobId).then(data => viewJobDetail(data))
@@ -78,26 +78,26 @@ const jobsCards = (arrayJobs) => {
 const viewJobDetail = (job) => {
 
     hideElement($("#spinner"))
-
+    
     const {name, description, location, category, seniority, img, detail, id} = job
 
     $("#container").innerHTML = `
     
-    <div id="card-${id}" class="w-[96%] h-full my-4 border border-2 rounded-md shadow-2xl sm:w-1/2 xl:2/3 xl:py-4">
+    <div id="card-${id}" class="w-[96%] h-full my-4 border border-2 rounded-md shadow-2xl sm:w-1/2 xl:w-2/5 xl:py-4 2xl:w-2/5">
        <figure class ="w-full h-1/3 flex mt-2 justify-center items-center">
             <img src="${img}" alt="job" class="w-full h-[170px]">
        </figure>
        <div id ="contents" class="h-2/3 p-2 flex flex-col justify-center items-center">
             <h3 class="text-3xl font-bold text-center">${name}</h3>
             <p class="mt-4 px-2 text-2xl text-center">${description}</p>
-            <a id="seeMore" class="showDetail my-4 text-xl  text-blue-600 text-center underline block">Ver más detalles</a>
-            <a id="seeLess" class="showDetail my-4 text-xl text-blue-600 text-center underline block hidden">Ocultar detalles</a>
+            <a id="seeMore" class="showDetail my-4 text-xl  text-blue-600 text-center underline block cursor-grab">Ver más detalles</a>
+            <a id="seeLess" class="showDetail my-4 text-xl text-blue-600 text-center underline block cursor-grab hidden">Ocultar detalles</a>
             <p id="seeDetail" class="mb-4 px-2 text-2xl text-center hidden">${detail}</p>
             
-            <div class="flex flex-row">
-               <div id="locationDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-pink-400 text-xl text-center font-bold rounded-md">${location}</div>
-               <div id="categoryDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-yellow-400 text-xl text-center font-bold rounded-md ">${category}</div>
-               <div id="seniorityDiv" class="h-14 my-2 mx-1 px-2 flex items-center bg-orange-400 text-xl text-center font-bold rounded-md">${seniority}</div>
+            <div class="flex flex-row my-3 h-30">
+               <div id="locationDiv" class="m-1 p-2  flex items-center bg-pink-400 text-xl text-center font-bold rounded-md hover:bg-pink-600">${location}</div>
+               <div id="categoryDiv" class="m-1 p-2  flex items-center bg-yellow-400 text-xl text-center font-bold rounded-md hover:bg-yellow-600">${category}</div>
+               <div id="seniorityDiv" class="m-1 p-2 flex items-center bg-orange-400 text-xl text-center font-bold rounded-md hover:bg-orange-600">${seniority}</div>
             </div>
           
         </div>
@@ -156,17 +156,17 @@ const failedToLoad = () => {
 
     hideElement($("#chooseFilter"))
     hideElement($("#spinner"))
+    
 }
-
 
 //ALERTA DE CONFIRMACION
 
 const alertConfirm = (id) => {
     getAJob(id).then(data => $("#confirm").innerHTML = `
-    <div class="w-4/5 h-20 px-2 py-6 lg:h-24 border-red-500 bg-red-200 flex justify-center items-center md:w-5/6">
+    <div class="w-4/5 h-20 my-32 px-2 py-6 lg:h-24 border-red-500 bg-red-200 flex justify-center items-center md:w-5/6 max-[340px]:text-sm">
        <p class="text-red-500 mr-3 lg:text-2xl">¿Estás seguro de eliminar ${data.name}?</p>
-       <button id="${data.id}" class="w-1/3 h-10 m-1 lg:w-1/5 lg:h-14 lg:text-lg rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Eliminar trabajo</button>
-       <button class="w-1/3 h-10 lg:h-14 m-1 lg:w-1/5 lg:text-lg  rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancelDeleteJob()">Cancelar</button>
+       <button id="${data.id}" class="w-1/3 h-10 m-1 px-1 lg:w-1/5 lg:h-14 lg:text-lg rounded-md shadow-md bg-red-400 text-white font-bold  text-xs md:w-1/12" onclick="deleteJob(${data.id})">Eliminar trabajo</button>
+       <button class="w-1/3 h-10 lg:h-14 m-1 px-1 lg:w-1/5 lg:text-lg  rounded-md shadow-md bg-green-400 text-white font-bold text-xs md:w-1/12" onclick="cancelDeleteJob()">Cancelar</button>
     </div>`)
       
 }
@@ -338,7 +338,8 @@ $("#cleanBtn").addEventListener("click",()=>{
     hideElement($("#filterLocation"))
     hideElement($("#filterSeniority"))
     hideElement($("#filterCategory"))
-    hideElement($("#filterButtons")) 
+    hideElement($("#filterButtons"))
+     
 })
 
 //EVENTOS NAV
@@ -348,7 +349,11 @@ $("#navJob").addEventListener('click', () =>{
     hideElement($("#editJobForm"))
     $("#container").innerHTML= ""
     showElement($("#newJobForm"))
+    hideElement($("#conditionsContainer"))
+    hideElement($("#error"))
+    hideElement($("#spinner"))
 })
+
 
 
 $("#navHome").addEventListener('click', () =>{
@@ -357,14 +362,33 @@ $("#navHome").addEventListener('click', () =>{
     hideElement($("#editJobForm"))
     showElement($("#filters"))
     $("#chooseFilter").value = "choose"
-
+    hideElement($("#conditionsContainer"))
     hideElement($("#filterLocation"))
     hideElement($("#filterSeniority"))
     hideElement($("#filterCategory"))
-    hideElement($("#filterButtons")) 
+    hideElement($("#filterButtons"))
+    hideElement($("#error")) 
 
     getJobs().then(data => jobsCards(data))
 })
+
+$("#navFooter").addEventListener('click', () =>{
+    showElement($("#spinner"))
+    hideElement($("#newJobForm"))
+    hideElement($("#editJobForm"))
+    showElement($("#filters"))
+    $("#chooseFilter").value = "choose"
+    hideElement($("#conditionsContainer"))
+    hideElement($("#filterLocation"))
+    hideElement($("#filterSeniority"))
+    hideElement($("#filterCategory"))
+    hideElement($("#filterButtons"))
+    hideElement($("#error")) 
+
+    getJobs().then(data => jobsCards(data))
+})
+
+
 
 
 //EVENTO NAVBAR RESPONSIVE
@@ -375,12 +399,13 @@ $("#btnMenu").addEventListener('click', () => $("#menu").classList.toggle('hidde
 
 $("#conditions").addEventListener('click', ()=>{
     showElement($("#conditionsContainer"))
-    hideElement($("#container"))
+    $("#container").innerHTML = ""
     hideElement($("#newJobForm"))
     hideElement($("#editJobForm"))
     hideElement($("#filters"))
     hideElement($("#filterLocation"))
     hideElement($("#filterSeniority"))
     hideElement($("#filterCategory"))
-    hideElement($("#filterButtons")) 
+    hideElement($("#filterButtons"))
+    hideElement($("#error"))
 })
