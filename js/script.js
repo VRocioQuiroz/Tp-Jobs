@@ -5,7 +5,7 @@ const hideElement = (selector) => selector.classList.add("hidden")
 const showElement = (selector) => selector.classList.remove("hidden")
 
 
-//TRAER TRABAJOS
+//GET REQUESTS
 
 const getJobs = async () => {
     const response = await fetch("https://6381400d9440b61b0d14b99a.mockapi.io/jobs")
@@ -16,9 +16,6 @@ const getJobs = async () => {
 getJobs().then(data => jobsCards(data))
 getJobs().catch(() => failedToLoad())
 
-
-//TRAER UN TRABAJO
-
 const getAJob = async (id) => {
     const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs/${id}`)
     const job = await response.json()
@@ -26,7 +23,9 @@ const getAJob = async (id) => {
     return job
 }
 
-//GENERAR TARJETAS
+//FUNCTIONS
+
+//CARDS
 
 const jobsCards = (arrayJobs) => {
    
@@ -73,7 +72,6 @@ const jobsCards = (arrayJobs) => {
  }
 }
 
-//VER DETALLE DE UN TRABAJO
 
 const viewJobDetail = (job) => {
 
@@ -133,7 +131,7 @@ const viewJobDetail = (job) => {
     })
   }
    
-  //Ver más detalles
+  //See more details and hide details
   
   for (const btn of $$(".showDetail")) {
     btn.addEventListener("click", () => {
@@ -146,8 +144,6 @@ const viewJobDetail = (job) => {
   }
 }
 
-//FUNCION CATCH
-
 const failedToLoad = () => {
     $("#error").innerHTML = `
     <div class="w-4/5 h-16 border-red-500 bg-red-200 flex justify-center items-center md:w-3/5">
@@ -159,8 +155,6 @@ const failedToLoad = () => {
     
 }
 
-//ALERTA DE CONFIRMACION
-
 const alertConfirm = (id) => {
     getAJob(id).then(data => $("#confirm").innerHTML = `
     <div class="w-4/5 h-20 my-32 px-2 py-6 lg:h-24 border-red-500 bg-red-200 flex justify-center items-center md:w-5/6 max-[340px]:text-sm">
@@ -171,16 +165,13 @@ const alertConfirm = (id) => {
       
 }
 
-//CANCELAR ELIMINACION DE TRABAJO
-
 const cancelDeleteJob = () => {
     hideElement($("#confirm"))
 
     getJobs().then(data => jobsCards(data))
 }
 
-
-//ELIMINAR TRABAJO
+//REQUEST DELETE
 
 const deleteJob = (id) => {
     fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs/${id}`, {
@@ -188,10 +179,7 @@ const deleteJob = (id) => {
     }).finally(() => window.location.href = "index.html")
 }
 
-
-//EDITAR TRABAJO
-
-//Precarga
+//EDIT
 
 const preloadJob = (job) => {
     $("#editJobImg").value = job.img
@@ -204,7 +192,6 @@ const preloadJob = (job) => {
 
 }
 
-//Objeto ya editado 
 const jobEdited = () => {
     return{
         description: $("#editJobDescription").value,
@@ -217,7 +204,7 @@ const jobEdited = () => {
     }
 }
 
-//Edita mock api
+//REQUEST EDIT
 
 const editJob = (id) => {
       
@@ -230,18 +217,13 @@ const editJob = (id) => {
     }).finally(() => window.location.href="index.html")
 }
 
-//Evento que lo ejecuta
-
 $("#editForm").addEventListener("submit", (e) => {
     e.preventDefault()
     const id = $("#submitEdited").getAttribute("data-id")
     editJob(id)
 })
 
-
-//CREAR UN TRABAJO
-
-//Envia a mock api
+//REQUEST SEND
 
 const postNewJob = () => {
     fetch("https://6381400d9440b61b0d14b99a.mockapi.io/jobs", {
@@ -253,7 +235,7 @@ const postNewJob = () => {
     }).finally(() => window.location.href = "index.html")
 }
 
-//Funcion que crea un trabajo
+//CREATE A JOB
 
 const saveNewJob = () => {
    
@@ -269,8 +251,6 @@ const saveNewJob = () => {
     
 }
 
-//Evento que lo ejecuta
-
 $("#newJobForm").addEventListener('submit', (e) =>{
     e.preventDefault()
     postNewJob()
@@ -278,7 +258,7 @@ $("#newJobForm").addEventListener('submit', (e) =>{
 })
 
 
-//FILTROS
+//FILTERS
 
 const filterBy = async (filterOption, filterValue) => {
     const response = await fetch(`https://6381400d9440b61b0d14b99a.mockapi.io/jobs?${filterOption}=${filterValue}`)
@@ -286,9 +266,9 @@ const filterBy = async (filterOption, filterValue) => {
     return jobsCards(job)
 }
 
-//EVENTOS
+//EVENTS
 
-//EVENTO ELEGIR FILTRO Y BUSCAR
+//CHOOSE FILTER AND SEARCH
 
 $("#chooseFilter").addEventListener("change",(e) =>{
 
@@ -328,7 +308,7 @@ $("#chooseFilter").addEventListener("change",(e) =>{
 })
 
 
-//EVENTO LIMPIAR
+//CLEAN
 
 $("#cleanBtn").addEventListener("click",()=>{
     $("#container").innerHTML= ""
@@ -342,7 +322,7 @@ $("#cleanBtn").addEventListener("click",()=>{
      
 })
 
-//EVENTOS NAV
+//NAV
 
 $("#navJob").addEventListener('click', () =>{
     hideElement($("#filters"))
@@ -353,8 +333,6 @@ $("#navJob").addEventListener('click', () =>{
     hideElement($("#error"))
     hideElement($("#spinner"))
 })
-
-
 
 $("#navHome").addEventListener('click', () =>{
     showElement($("#spinner"))
@@ -389,13 +367,11 @@ $("#navFooter").addEventListener('click', () =>{
 })
 
 
-
-
-//EVENTO NAVBAR RESPONSIVE
+//HAMBURGER MENU
 
 $("#btnMenu").addEventListener('click', () => $("#menu").classList.toggle('hidden'))
 
-//EVENTO CONDICIONES
+//SEE CONDITIONS
 
 $("#conditions").addEventListener('click', ()=>{
     showElement($("#conditionsContainer"))
