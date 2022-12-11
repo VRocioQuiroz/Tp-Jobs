@@ -19,7 +19,7 @@ También podrá filtrar y buscar a través de dichos identificadores, editar los
 
 
 ### Diseño
-![Portal de trabajos](img\capture1-JobPortal.png)   ![Portal de trabajos responsive](img\capture2-JobPortal.png)
+![Portal de trabajos](img/capture1-JobPortal.png)   ![Portal de trabajos responsive](img/capture2-JobPortal.png)
 
 ---
 
